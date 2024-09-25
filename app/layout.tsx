@@ -18,11 +18,11 @@ const display = Fjalla_One({
 });
 
 export const metadata: Metadata = {
-  title: "ProLine Content Corps - Agency website template by Cosmic",
-  description: "A Cosmic template built with Blocks.",
+  title: "AdaTop",
+  description: "POS System & Inventory System For Your Business Dashboard",
   openGraph: {
-    title: "ProLine Content Corps - Agency website template by Cosmic",
-    description: "A Cosmic template built with Blocks.",
+    title: "AdaTop",
+    description: "POS System & Inventory System For Your Business Dashboard.",
     images:
       "https://imgix.cosmicjs.com/69313380-b156-11ee-9844-f9a09795e2a3-desktop.png?auto=format,compression",
   },
@@ -47,7 +47,7 @@ export default function RootLayout({
           >
             <CartProvider>
               <div>
-                <Banner />
+                {/* <Banner /> */}
                 <Header />
                 {children}
               </div>

@@ -1,4 +1,3 @@
-// app/page.tsx
 import { cn } from "@/cosmic/utils";
 import { buttonVariants } from "@/cosmic/elements/Button";
 import { Section } from "./PageSection";
@@ -22,20 +21,30 @@ export async function Page({
       .depth(1)
       .status(status ? status : "published");
 
+    const formattedSubheadline: string = page.metadata.subheadline
+      .replace(/(Save up to \d+%)/g, "<strong>$1</strong>") 
+      .replace(/(WAS) (\$\d+,\d+)/g, '<strong>$1</strong> <span class="line-through">$2</span>') 
+      .replace(
+        /(NOW FROM) (\$\d+)/g,
+        '<strong>$1</strong> <span class="text-pink-600 font-bold text-3xl">$2</span>'
+      ) 
+      .replace(/\n/g, "<br>"); 
     return (
       <div className={className}>
         <div className="mx-auto flex w-full max-w-6xl flex-col-reverse justify-between p-4 pb-16 text-zinc-950 dark:text-zinc-50 md:flex-row md:gap-12">
           <div className="flex w-full flex-col items-start justify-start md:w-1/2">
             <div className="py-4 md:pt-20">
-              <h1 className="font-display text-4xl tracking-tight md:text-8xl">
+              <h1 className="font-display text-4xl tracking-tight md:text-6xl">
                 {page.metadata.h1}
               </h1>
             </div>
             <div className="pb-8">
-              <div className="text-xl text-zinc-700 dark:text-zinc-300">
-                {page.metadata.subheadline}
-              </div>
+              <div
+                className="text-xl text-zinc-700 dark:text-zinc-300"
+                dangerouslySetInnerHTML={{ __html: formattedSubheadline }}
+              />
             </div>
+
             <div className="w-full md:pb-20">
               <div className="flex w-full gap-4 md:w-max">
                 <Link
@@ -47,7 +56,7 @@ export async function Page({
                   )}
                   href="https://www.cosmicjs.com"
                 >
-                  Get started free
+                  Get Your offer
                 </Link>
                 <Link
                   className={cn(
