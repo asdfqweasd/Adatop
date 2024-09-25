@@ -33,7 +33,7 @@ export default async function Header() {
           <NavMenu
             query={{ type: "navigation-menus", slug: "header" }}
             hasMobileMenu
-            className="flex"
+            className="flex-row"
           />
           <CheckOut className="ml-4" productPath={"/services"} />
         </div>
