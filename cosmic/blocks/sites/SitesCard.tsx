@@ -1,4 +1,5 @@
-import { cn, getFormattedDate } from "@/cosmic/utils";
+import { cn, } from "@/cosmic/utils";
+//getFormattedDate
 import { Calendar, Clock, Pin } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +29,7 @@ export function EventCard({
   return (
     <Link
       className={cn("group relative w-full mb-auto", className)}
-      href={`/events/${event.slug}`}
+      href={`/sites/${event.slug}`}
     >
       <div className="w-full overflow-hidden group-hover:opacity-75">
         <img
@@ -48,17 +49,18 @@ export function EventCard({
           />
           <div className="flex flex-col h-full justify-end space-y-1">
             <div className="flex items-center space-x-2 text-sm font-medium text-zinc-900 dark:text-zinc-50">
-              <Calendar className="shrink-0 w-4 h-4" />
-              <span>{getFormattedDate(event.metadata.start_date)}</span>
+              <Calendar className="shrink-0 w-4 h-4"/>
+               <p>Mon - Fri</p>
+              {/* <span>{getFormattedDate(event.metadata.start_date)}</span> */}
             </div>
             <div className="flex items-center space-x-1 text-sm font-medium text-zinc-900 dark:text-zinc-50">
               <Clock className="shrink-0 mr-1 w-4 h-4" />
               <span>From</span>
               <span>{event.metadata.start_time}</span>
               <span>until</span>
-              {event.metadata.start_date !== event.metadata.end_date && (
+              {/* {event.metadata.start_date !== event.metadata.end_date && (
                 <span>{getFormattedDate(event.metadata.end_date)}</span>
-              )}
+              )} */}
               <span>{event.metadata.end_time}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm font-medium text-zinc-900 dark:text-zinc-50">

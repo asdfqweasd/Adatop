@@ -1,4 +1,4 @@
-import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent";
+import { SingleEvent } from "@/cosmic/blocks/sites/SingleEvent";
 
 export default async function SingleEventPage({
   params,
@@ -7,7 +7,7 @@ export default async function SingleEventPage({
 }) {
   return (
     <main className="p-4">
-      <SingleEvent query={{ slug: params.slug, type: "events" }} />
+      <SingleEvent query={{ slug: params.slug, type: "sites" }} />
     </main>
   );
 }
