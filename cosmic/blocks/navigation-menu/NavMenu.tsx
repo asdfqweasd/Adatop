@@ -13,14 +13,13 @@ export type ItemType = {
   secondarynav?: string;
 };
 
-// 这个组件用于渲染单个导航项及其二级导航（如果存在）
 function NavItem({ item, status }: { item: ItemType; status?: string }) {
   const [secondaryNav, setSecondaryNav] = useState<ItemType[]>([]);
-  const [isHovered, setIsHovered] = useState(false); // 是否悬停的状态
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null); // 定时器状态
+  const [isHovered, setIsHovered] = useState(false); 
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null); 
 
   useEffect(() => {
-    // 如果有二级导航的ID，则进行异步加载
+
     const fetchSecondaryNav = async () => {
       if (item.secondarynav) {
         try {
@@ -41,18 +40,18 @@ function NavItem({ item, status }: { item: ItemType; status?: string }) {
 
     fetchSecondaryNav();
   }, [item.secondarynav, status]);
-  // 鼠标进入时取消隐藏
+
   const handleMouseEnter = () => {
-    if (hoverTimeout) clearTimeout(hoverTimeout); // 清除定时器
-    setIsHovered(true); // 显示二级导航
+    if (hoverTimeout) clearTimeout(hoverTimeout); 
+    setIsHovered(true);
   };
 
-  // 鼠标离开时设置定时器，2秒后隐藏二级导航
+
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => {
       setIsHovered(false);
-    }, 1000); // 延迟1秒
-    setHoverTimeout(timeout); // 保存定时器
+    }, 1000);
+    setHoverTimeout(timeout); 
   };
 
   return (
@@ -61,7 +60,6 @@ function NavItem({ item, status }: { item: ItemType; status?: string }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* 渲染一级导航 */}
       <Link
         href={item.link}
         key={item.title}
@@ -71,7 +69,6 @@ function NavItem({ item, status }: { item: ItemType; status?: string }) {
         {item.title}
       </Link>
 
-      {/* 如果有二级导航并且加载完成，则渲染二级导航 */}
       {secondaryNav.length > 0 && isHovered && (
         <div className="secondary-nav absolute left-0 ml-4 mt-2 bg-white shadow-md rounded-md">
           {secondaryNav.map((subItem) => (
@@ -111,7 +108,6 @@ export async function NavMenu({
     <div className={className}>
       {/* Desktop */}
       <div className={hasMobileMenu ? "hidden md:flex" : ""}>
-        {/* 渲染一级导航 */}
         {nav.metadata.items.map((item: ItemType) => (
           <NavItem key={item.title} item={item} status={status} />
         ))}
