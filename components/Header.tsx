@@ -29,14 +29,14 @@ export default async function Header() {
             className="h-10 m-auto hidden dark:block"
           />
         </Link>
-        <div className="flex items-center">
-          <NavMenu
-            query={{ type: "navigation-menus", slug: "header" }}
-            hasMobileMenu
-            className="flex-row"
-          />
-          <CheckOut className="ml-4" productPath={"/services"} />
-        </div>
+          <div className="flex items-center">
+            <NavMenu
+              query={{ type: "navigation-menus", slug: "header" }}
+              hasMobileMenu
+              className="flex-row"
+            />
+            <CheckOut className="ml-4" productPath={"/services"} />
+          </div>
       </div>
     </nav>
   );
