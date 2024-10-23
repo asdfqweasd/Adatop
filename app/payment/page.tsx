@@ -1,5 +1,6 @@
+import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
 import { cosmic } from "@/cosmic/client";
-import { Button } from "@/cosmic/elements/Button";
+
 
 export default async function payments() {
   const { object: payment } = await cosmic.objects
@@ -119,6 +120,69 @@ export default async function payments() {
           <a href="#" className="bg-blue-600 text-white px-6 py-2 rounded-full">
             Get your offer
           </a>
+        </div>
+      </section>
+
+      <section className="text-center mt-16 mb-16">
+        <h2 className="text-2xl font-semibold mb-4">
+          Satisfy more customers with fast, secure payment methods
+        </h2>
+        <p className="text-gray-600 mb-8">
+          Keep up with consumer demand by accepting the most wanted payment services on the market. You can accept a range of payment options, from online payments, pay via digital wallet, or link.
+        </p>
+
+        {/* Icon and Text Rows */}
+        <div className="flex flex-col md:flex-row justify-around items-center">
+          
+          {/* Chip and Pin */}
+          <div className="md:w-1/4 text-center mb-8 md:mb-0">
+            {/* Placeholder for Chip and Pin SVG */}
+            <div className="mx-auto mb-4 w-16 h-16">
+              {/* Insert your SVG here */}
+              <div className="mx-auto mb-4 w-16 h-16">
+              <img src="/Icon/cards.svg" alt="Chip and Pin" className="w-full h-full" />
+            </div>
+            </div>
+            <h3 className="text-xl font-semibold">Chip and Pin</h3>
+            <p className="text-gray-600">
+              Chip and pin payments reduce fraud by adding a layer of security to transactions.
+            </p>
+          </div>
+
+          {/* Contactless */}
+          <div className="md:w-1/4 text-center mb-8 md:mb-0">
+            {/* Placeholder for Contactless SVG */}
+            <div className="mx-auto mb-4 w-16 h-16">
+              {/* Insert your SVG here */}
+              <img src="/Icon/contactless.svg" alt="contactless" className="w-full h-full"/>
+            </div>
+            <h3 className="text-xl font-semibold">Contactless</h3>
+            <p className="text-gray-600">
+              Offer a faster, more convenient checkout process when customers pay with contactless.
+            </p>
+          </div>
+
+          {/* Remote Payments */}
+          <div className="md:w-1/4 text-center">
+            {/* Placeholder for Remote Payments SVG */}
+            <div className="mx-auto mb-4 w-16 h-16">
+              {/* Insert your SVG here */}
+              <img src="/Icon/remote.svg" alt="remote" className="w-full h-full"/>
+            </div>
+            <h3 className="text-xl font-semibold">Remote Payments</h3>
+            <p className="text-gray-600">
+              Card not present? No problem. Securely accept remote payments via link.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="md:container mt-12 pb-8 m-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-100">
+            Frequently Asked Questions
+          </h2>
+          <FAQs query={{ slug: "payments", type: "pages" }} />
         </div>
       </section>
     </div>

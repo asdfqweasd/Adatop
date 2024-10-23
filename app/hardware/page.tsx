@@ -1,5 +1,3 @@
-
-
 import { HardwareList } from "@/cosmic/blocks/hardware/HardwareList";
 import { cosmic } from "@/cosmic/client";
 import { Button } from "@/cosmic/elements/Button";
