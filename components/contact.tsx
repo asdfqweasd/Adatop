@@ -119,7 +119,7 @@ export default function Contact({ onClose }: ContactProps) {
             specialLabel=""
             placeholder="Phone"
             disableCountryCode={false}
-            disableAreaCodes={true}
+            enableAreaCodes={true}
             autoFormat={false}
             buttonClass="absolute left-0 top-0 bottom-0 flex items-center justify-center px-3"
           />
