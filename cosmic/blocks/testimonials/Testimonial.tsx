@@ -43,7 +43,7 @@ export function Testimonial({
             {testimonial.title}
           </div>
           <div className="text-zinc-500 dark:text-zinc-400">
-            {testimonial.metadata.position}, {testimonial.metadata.company}
+            {testimonial.metadata.position}{testimonial.metadata.company}
           </div>
         </figcaption>
       </div>
