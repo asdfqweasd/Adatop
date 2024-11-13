@@ -2,7 +2,7 @@
 import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
 import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
 import { Page } from "@/cosmic/blocks/pages/Page";
-
+export const revalidate = 0;
 export default async function HomePage() {
   return (
     <main>

@@ -10,6 +10,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import Banner from "@/components/Banner";
 import { Suspense } from "react";
 
+
 const sans = Libre_Franklin({ subsets: ["latin"], variable: "--font-sans" });
 const display = Fjalla_One({
   weight: "400",
