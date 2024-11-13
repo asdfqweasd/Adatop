@@ -24,6 +24,7 @@ export async function Testimonials({
     .limit(limit ? limit : 100)
     .skip(skip ? skip : 0)
     .status(status ? status : "published");
+
   return (
     <div className={className}>
       {testimonials?.map((testimonial: TestimonialType) => {

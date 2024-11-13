@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CartProvider } from "@/cosmic/blocks/ecommerce/CartProvider";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
-import Banner from "@/components/Banner";
 import { Suspense } from "react";
 
 
