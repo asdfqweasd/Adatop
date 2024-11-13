@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-
+export const revalidate = 0; 
 export default async function BlogPage() {
   return (
     <main className="p-4">

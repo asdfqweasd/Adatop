@@ -1,6 +1,6 @@
 // app/blog/[slug]/page.tsx
 import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-
+export const revalidate = 0; 
 export default async function SingleBlogPage({
   params,
 }: {

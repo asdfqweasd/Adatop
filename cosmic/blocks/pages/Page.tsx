@@ -2,7 +2,7 @@
 import { cosmic } from "@/cosmic/client";
 import { notFound } from "next/navigation";
 import ClientPage from "./ClientPage"; 
-
+export const revalidate = 0; 
 export async function Page({
   query,
   className,

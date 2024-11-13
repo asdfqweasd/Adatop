@@ -1,6 +1,6 @@
 import { cosmic } from "@/cosmic/client";
 import { EventCard, EventCardType } from "./SitesCard";
-
+export const revalidate = 0; 
 export async function EventsList({
   query,
   className,

@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { CartProvider } from "@/cosmic/blocks/ecommerce/CartProvider";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Suspense } from "react";
+export const revalidate = 0; 
 
 
 const sans = Libre_Franklin({ subsets: ["latin"], variable: "--font-sans" });

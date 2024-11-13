@@ -1,5 +1,5 @@
 import { cosmic } from "@/cosmic/client";
-
+export const revalidate = 0; 
 export default async function pos() {
   const { object: pos } = await cosmic.objects
     .findOne({

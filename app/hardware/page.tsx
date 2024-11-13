@@ -1,7 +1,7 @@
 import { HardwareList } from "@/cosmic/blocks/hardware/HardwareList";
 import { cosmic } from "@/cosmic/client";
 import { Button } from "@/cosmic/elements/Button";
-export const revalidate = 60; 
+export const revalidate = 0; 
 export default async function hardware() {
   
   const { object: page } = await cosmic.objects

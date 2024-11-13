@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cosmic } from '@/cosmic/client';
-
+export const revalidate = 0; 
 export type ItemType = {
   title: string;
   link: string;

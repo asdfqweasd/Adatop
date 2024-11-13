@@ -1,6 +1,6 @@
 // app/site/page.tsx
 import { EventsList } from "@/cosmic/blocks/sites/SitesList";
-
+export const revalidate = 0; 
 export default async function EventListPage() {
   return (
     <main className="p-4">

@@ -1,6 +1,6 @@
 import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
 import { cosmic } from "@/cosmic/client";
-
+export const revalidate = 0; 
 
 export default async function payments() {
   const { object: payment } = await cosmic.objects

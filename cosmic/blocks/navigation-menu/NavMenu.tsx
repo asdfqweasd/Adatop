@@ -3,7 +3,7 @@ import React from 'react';
 import NavItem from './NavItem'; // 导入客户端组件
 import { MobileNav } from './MobileNav';
 import { cosmic } from '@/cosmic/client';
-
+export const revalidate = 0; 
 export type ItemType = {
   title: string;
   link: string;

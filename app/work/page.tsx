@@ -1,6 +1,7 @@
 // app/page.tsx
 import { ProjectCard, ProjectType } from "@/components/project-card";
 import { cosmic } from "@/cosmic/client";
+export const revalidate = 0; 
 
 export default async function WorkPage() {
   const { object: page } = await cosmic.objects

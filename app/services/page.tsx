@@ -1,7 +1,7 @@
 // app/page.tsx
 import { cosmic } from "@/cosmic/client";
 import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
-
+export const revalidate = 0; 
 export default async function ShopPage() {
   const { object: page } = await cosmic.objects
     .findOne({

@@ -1,6 +1,6 @@
 import { cosmic } from "@/cosmic/client";
 import { Testimonial, TestimonialType } from "./Testimonial";
-
+export const revalidate = 0; 
 export async function Testimonials({
   query,
   sort,

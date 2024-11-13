@@ -1,6 +1,6 @@
 import { cosmic } from "@/cosmic/client";
 import { HardwareCard,HardwareType } from "./HardwareCard";
-
+export const revalidate = 0; 
 export async function HardwareList({
   query,
   className,
