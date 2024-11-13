@@ -11,6 +11,9 @@ const getTestimonials = unstable_cache(
     skip?: number,
     status?: "draft" | "published" | "any"
   ) => {
+    // 添加调试日志，查看函数是否被调用
+    console.log("getTestimonials called with params:", { query, sort, limit, skip, status });
+
     const { objects: testimonials } = await cosmic.objects
       .find(query)
       .props("id,slug,title,metadata")
@@ -19,12 +22,15 @@ const getTestimonials = unstable_cache(
       .limit(limit ? limit : 100)
       .skip(skip ? skip : 0)
       .status(status ? status : "published");
-    
+
+    // 添加调试日志，查看返回的数据
+    console.log("Testimonial data fetched:", testimonials);
+
     return testimonials;
   },
   ['testimonials-cache'],
   {
-    revalidate: 1800, // 1小时后重新验证
+    revalidate: 1800, 
     tags: ['testimonials']
   }
 );
@@ -44,7 +50,12 @@ export async function Testimonials({
   className?: string;
   status?: "draft" | "published" | "any";
 }) {
+  console.log("Testimonials component called with:", { query, sort, limit, skip, className, status });
+
   const testimonials = await getTestimonials(query, sort, limit, skip, status);
+
+  // 在组件内添加调试日志，查看 `testimonials` 数据
+  console.log("Testimonials fetched:", testimonials);
 
   return (
     <div className={className}>
