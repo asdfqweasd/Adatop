@@ -74,7 +74,7 @@ export async function SingleProduct({
                 {product.title}
               </h1>
               <p className="mb-6 text-3xl tracking-tight text-gray-900 dark:text-white">
-                ${product.metadata.price.toLocaleString("en-US")}
+                {/* ${product.metadata.price.toLocaleString("en-US")}
                 {product.metadata.recurring.is_recurring && (
                   <span>
                     {" "}
@@ -89,7 +89,7 @@ export async function SingleProduct({
                       ? "s"
                       : ""}
                   </span>
-                )}
+                )} */}
               </p>
               <div className="mb-8">
                 {!product.metadata.quantity ? (

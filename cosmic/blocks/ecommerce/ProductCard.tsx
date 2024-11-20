@@ -41,9 +41,9 @@ export function ProductCard({
             {product.title}
           </h3>
         </div>
-        <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+        {/* <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
           ${product.metadata.price.toLocaleString("en-US")}
-        </p>
+        </p> */}
       </div>
     </Link>
   );

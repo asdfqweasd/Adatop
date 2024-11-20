@@ -29,7 +29,8 @@ export function EventCard({
   return (
     <Link
       className={cn("group relative w-full mb-auto", className)}
-      href={`/sites/${event.slug}`}
+      // href={`/sites/${event.slug}`}
+      href={`/sites`}
     >
       <div className="w-full overflow-hidden group-hover:opacity-75">
         <img

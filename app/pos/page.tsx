@@ -1,5 +1,5 @@
 import { cosmic } from "@/cosmic/client";
-export const revalidate = 0; 
+export const revalidate = 0;
 export default async function pos() {
   const { object: pos } = await cosmic.objects
     .findOne({
@@ -16,17 +16,18 @@ export default async function pos() {
         <div className="flex-1 mb-8 md:mb-0">
           <h1 className="text-3xl font-bold mb-4">{pos.metadata.h1}</h1>
           <p className="text-gray-600 mb-4">
-            Delight shoppers, speed up sales, and grow your business. Tailor
-            your Epos Now retail POS to your exact needs with our AppStore.
+            RestoSuite is the best software solution for hospitality and
+            restaurants that value service quality and seek innovation.
+            Integrate your business into the digital world today!
           </p>
-          <p className="font-semibold mb-4">
+          {/* <p className="font-semibold mb-4">
             Get your retail POS now and{" "}
             <span className="text-pink-600">save up to 86%!</span>
           </p>
           <p className="text-lg mb-6">
             <del className="text-gray-500">WAS $1,199</del>, NOW FROM{" "}
             <span className="text-pink-600 text-2xl">$599*</span>
-          </p>
+          </p> */}
           <div className="flex gap-4">
             <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700">
               Get your offer
@@ -69,10 +70,9 @@ export default async function pos() {
                 className="w-full h-full"
               />
             </div>
-            <h3 className="text-xl font-semibold">Quicker admin</h3>
+            <h3 className="text-xl font-semibold"> Apple / Google wallet</h3>
             <p className="text-gray-600">
-              Save up to 10 hours every month on business management and staff
-              admin.
+            Apple and Google Wallet support the use of digital membership cards for added convenience
             </p>
           </div>
 
@@ -101,9 +101,9 @@ export default async function pos() {
                 className="w-full h-full"
               />
             </div>
-            <h3 className="text-xl font-semibold">Easier stock counts</h3>
+            <h3 className="text-xl font-semibold">Gift Card</h3>
             <p className="text-gray-600">
-              Enjoy 80% faster stock counts with the AdaPos wireless scanner.
+            Purchase or transfer gift cards online (online payment, invite to receive rewards).
             </p>
           </div>
         </div>
@@ -130,11 +130,22 @@ export default async function pos() {
             build it for success with a dedicated POS system.
           </p>
           <ul className="list-none space-y-2">
-            <li>✔ Multi-site and omnichannel store management, all in one place</li>
-            <li>✔ Detailed sales analytics that reveal top-performing products and employees</li>
+            <li>
+              ✔ Multi-site and omnichannel store management, all in one place
+            </li>
+            <li>
+              ✔ Detailed sales analytics that reveal top-performing products
+              and employees
+            </li>
             <li>✔ Extensive inventory management with real-time updates</li>
-            <li>✔ Integrate with a fully loaded ecommerce platform that syncs with your pos</li>
-            <li>✔ Choose from a suite of business automation apps and add ons, from marketing to bookkeeping, to ecommerce</li>
+            <li>
+              ✔ Integrate with a fully loaded ecommerce platform that syncs
+              with your pos
+            </li>
+            <li>
+              ✔ Choose from a suite of business automation apps and add ons,
+              from marketing to bookkeeping, to ecommerce
+            </li>
           </ul>
           <p className="text-gray-600 mt-4">
             The Complete Retail Solution includes POS software, terminal with
@@ -150,16 +161,34 @@ export default async function pos() {
       <section className="flex flex-col md:flex-row justify-between items-center">
         {/* Left Side - Text Content */}
         <div className="flex-1 mb-8 md:mb-0">
-          <h2 className="text-3xl font-bold mb-4">Open your store to the world</h2>
+          <h2 className="text-3xl font-bold mb-4">
+            Open your store to the world
+          </h2>
           <p className="text-gray-600 mb-4">
-            Building an online presence has never been more important. Manage omnichannel trading with ease when you integrate with your chosen ecommerce platform.
+            Building an online presence has never been more important. Manage
+            omnichannel trading with ease when you integrate with your chosen
+            ecommerce platform.
           </p>
           <ul className="list-none space-y-2 text-gray-600">
-            <li>✔ Launch your online store using a reliable and versatile ecommerce platform</li>
-            <li>✔ Offer choice, safety and convenience to your customers with Click & Collect services</li>
-            <li>✔ Track your online orders and in-store purchases together for simplified money and stock management</li>
-            <li>✔ Provide the payment options that work best for you and your customers</li>
-            <li>✔ Manage multi-site trading with ease. See our <a href="#" className="text-blue-600 underline">enterprise</a> page for more details</li>
+            <li>
+              ✔ Launch your online store using a reliable and versatile
+              ecommerce platform
+            </li>
+            <li>
+              ✔ Offer choice, safety and convenience to your customers with
+              Click & Collect services
+            </li>
+            <li>
+              ✔ Track your online orders and in-store purchases together for
+              simplified money and stock management
+            </li>
+            <li>
+              ✔ Provide the payment options that work best for you and your
+              customers
+            </li>
+            <li>
+              ✔ Manage multi-site trading with ease.
+            </li>
           </ul>
         </div>
 
@@ -170,6 +199,91 @@ export default async function pos() {
             alt="POS system on tablet"
             className="w-full max-w-md h-auto"
           />
+        </div>
+      </section>
+
+      <section className="flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto grid md:grid-cols-2 items-center gap-8 px-4">
+          {/* Left: Image */}
+          <div className="relative">
+            <img
+              src="/path/to/kitchen-image.jpg"
+              alt="Real-time Kitchen Management"
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          {/* Right: Text Content */}
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Eliminate confusion with real-time kitchen management
+            </h2>
+            <p className="mb-6 text-gray-700">
+              Increase table turnover and effortlessly connect your kitchen with
+              real-time management.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <li>Track time-at-table and manage floor plans in real-time</li>
+              <li>Speed up service with tableside ordering and payment</li>
+              <li>
+                Sync with major restaurant management apps to boost revenue and
+                productivity
+              </li>
+              <li>
+                Make sure customers get what they ordered. On-time, every time!
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-white">
+        <div className="container mx-auto grid md:grid-cols-2 items-center gap-8 px-4">
+          {/* Left: Text Content */}
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Hospitality POS hardware
+            </h2>
+            <p className="mb-6 text-gray-700">
+              Get started scaling your business with a fully customisable
+              hospitality point of sale system.
+            </p>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <li>
+                Duo Countertop POS terminal, with 15.6" full HD touchscreen,
+                10.1" HD customer touchscreen, and built-in 80mm thermal receipt
+                printer
+              </li>
+              <li>Air card machine with Adatop Payments</li>
+              <li>High-quality, secure all-metal cash drawer</li>
+              <li>
+                Hardware add-ons to complete your system
+              </li>
+            </ul>
+            <p className="mt-6 text-gray-700">
+              Running a larger hospitality business with multiple sites?We are also good at this!
+            </p>
+          </div>
+          {/* Right: Image */}
+          <div className="relative">
+            <img
+              src="/path/to/pos-hardware.jpg"
+              alt="Hospitality POS Hardware"
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-100 py-12">
+        <div className="container mx-auto text-center px-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Got multiple hospitality businesses? Try Adapos Enterprise!
+          </h2>
+          <div className="flex justify-center gap-4">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700">
+              Request a Demon
+            </button>
+          </div>
         </div>
       </section>
     </div>
