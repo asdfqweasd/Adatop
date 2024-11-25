@@ -49,7 +49,7 @@ export default function Contact({ onClose }: ContactProps) {
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg relative w-[min(90%,38rem)]"
+        className="bg-white max-w-md mx-auto dark:bg-gray-800 p-8 rounded-lg shadow-lg relative w-[min(70%,38rem)]"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -79,7 +79,7 @@ export default function Contact({ onClose }: ContactProps) {
           </div>
         )}
 
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col space-y-4 " onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
             <input
               className="h-14 px-4 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -133,7 +133,7 @@ export default function Contact({ onClose }: ContactProps) {
           />
 
           <textarea
-            className="h-52 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="h-32 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             name="message"
             placeholder="Message"
             required
