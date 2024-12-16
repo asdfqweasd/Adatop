@@ -1,7 +1,7 @@
 // ClientHero.tsx
 "use client";
-import { useState } from "react";
-import Contact from "@/components/contact";
+import Image from "next/image";
+import { ContactButton } from "@/components/ContactButton";
 
 type SectionType = {
   id: string;
@@ -29,18 +29,6 @@ interface ClientHeroProps {
 }
 
 export function ClientHero({ pageData }: ClientHeroProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const handleOpenForm = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsFormOpen(true);
-  };
-
-  const handleCloseForm = () => {
-    setIsFormOpen(false);
-  };
-
   return (
     <div className="bg-gray-50 flex items-center justify-center py-6">
       <div className="container mx-auto px-4">
@@ -58,36 +46,38 @@ export function ClientHero({ pageData }: ClientHeroProps) {
               {pageData.metadata.subheadline}
             </p>
             <div className="flex space-x-4">
-              <button
-                className="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-blue-700"
-                onClick={handleOpenForm}
-              >
-                Contact Us
-              </button>
-              {isFormOpen && <Contact onClose={handleCloseForm} />}
+              <ContactButton />
             </div>
           </div>
 
           {/* Image section */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Larger image on the left */}
             <div className="flex items-center justify-center">
-              <img
-                src={pageData.metadata.image.imgix_url}
-                alt="Main POS Image"
-                className="rounded-lg w-full h-auto object-cover"
-              />
+              <div className="w-full h-auto relative">
+                <Image
+                  src={pageData.metadata.image.imgix_url}
+                  alt="Main POS Image"
+                  width={500}
+                  height={500}
+                  priority
+                  className="rounded-lg w-full h-auto object-cover"
+                />
+              </div>
             </div>
 
-            {/* Two smaller images on the right */}
             <div className="grid grid-rows-2 gap-4">
               {pageData.metadata.sections.slice(0, 2).map((section, index) => (
                 <div key={index} className="flex items-center justify-center">
-                  <img
-                    src={section.image.imgix_url}
-                    alt={`POS Image ${index + 1}`}
-                    className="rounded-lg w-full h-auto object-cover"
-                  />
+                  <div className="w-full h-auto relative">
+                    <Image
+                      src={section.image.imgix_url}
+                      alt={`POS Image ${index + 1}`}
+                      width={300}
+                      height={300}
+                      loading="lazy"
+                      className="rounded-lg w-full h-auto object-cover"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

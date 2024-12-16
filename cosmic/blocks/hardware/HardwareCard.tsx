@@ -24,14 +24,14 @@ export function HardwareCard({
 }) {
   return (
     <Link
-      href={`/hardware/${Hardware.slug}`}
+      href={`/${Hardware.slug}`}
       className={cn("group relative", className)}
     >
       <div className="h-52 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
         <img
           src={`${Hardware.metadata.image.imgix_url}?w=1200&auto=format,compression`}
           alt={Hardware.title}
-          className="h-full w-full border border-zinc-100 object-cover object-center dark:border-zinc-800 lg:h-full lg:w-full"
+          className="h-full w-full bg-white  object-cover object-center dark:border-zinc-800 lg:h-full lg:w-full"
         />
       </div>
       <div className="mt-2 flex justify-between">

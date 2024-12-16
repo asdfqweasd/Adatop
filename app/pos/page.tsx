@@ -20,14 +20,6 @@ export default async function pos() {
             restaurants that value service quality and seek innovation.
             Integrate your business into the digital world today!
           </p>
-          {/* <p className="font-semibold mb-4">
-            Get your retail POS now and{" "}
-            <span className="text-pink-600">save up to 86%!</span>
-          </p>
-          <p className="text-lg mb-6">
-            <del className="text-gray-500">WAS $1,199</del>, NOW FROM{" "}
-            <span className="text-pink-600 text-2xl">$599*</span>
-          </p> */}
           <div className="flex gap-4">
             <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700">
               Get your offer
