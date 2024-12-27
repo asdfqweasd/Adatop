@@ -1,6 +1,5 @@
 // app/page.tsx
 import { cosmic } from "@/cosmic/client";
-import { TeamList } from "@/cosmic/blocks/team/TeamList";
 
 export default async function AboutPage() {
   const { object: page } = await cosmic.objects

@@ -1,7 +1,6 @@
 import { cosmic } from "@/cosmic/client";
 import ReactMarkdown from "react-markdown";
 import { ContactButton } from "@/components/ContactButton";
-import Image from "next/image";
 
 export default async function Insight() {
   const { object: insight } = await cosmic.objects
@@ -48,7 +47,7 @@ export default async function Insight() {
             </div>
             <div className="relative w-full h-[500px]">
               <img
-                src={`${insight.metadata.img.imgix_url}?w=1600&auto=format,compression`}
+                src={`${insight.metadata.img[0].imgix_url}?w=1600&fm=gif`}
                 alt="rsInsight"
                 className="object-contain w-full h-full"
               />

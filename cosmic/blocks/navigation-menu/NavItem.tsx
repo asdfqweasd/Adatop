@@ -1,10 +1,9 @@
 // NavItem.tsx
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { cosmic } from '@/cosmic/client';
-export const revalidate = 0; 
+import React, { useState } from "react";
+import Link from "next/link";
+export const revalidate = 0;
 export type ItemType = {
   title: string;
   link: string;
@@ -18,70 +17,68 @@ interface NavItemProps {
   status?: string;
 }
 
-export default function NavItem({ item, status }: NavItemProps) {
-  const [secondaryNav, setSecondaryNav] = useState<ItemType[]>([]);
-  const [isHovered, setIsHovered] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    const fetchSecondaryNav = async () => {
-      if (item.secondarynav) {
-        try {
-          const { object: secondaryNavResponse } = await cosmic.objects
-            .findOne({ id: item.secondarynav })
-            .props('metadata')
-            .depth(1)
-            .status(status ? status : 'published');
-
-          setSecondaryNav(
-            secondaryNavResponse?.metadata?.secondarymenus?.secitems || []
-          );
-        } catch (error) {
-          console.error('Error fetching secondary nav:', error);
-        }
-      }
-    };
-
-    fetchSecondaryNav();
-  }, [item.secondarynav, status]);
-
-  const handleMouseEnter = () => {
-    if (hoverTimeout) clearTimeout(hoverTimeout);
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setIsHovered(false);
-    }, 1000);
-    setHoverTimeout(timeout);
-  };
+export default function NavItem({ item}: NavItemProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const hasChildren = item.children && item.children.length > 0;
 
   return (
     <div
-      className="nav-item group relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="relative group"
+      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={() => hasChildren && setIsOpen(true)}
     >
-      <Link
-        href={item.link}
-        key={item.title}
-        target={item.open_in_new_tab ? '_blank' : ''}
-        className="group inline-flex h-10 w-full items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-zinc-50 dark:hover:bg-zinc-800 md:w-max"
-      >
-        {item.title}
-      </Link>
+      <div className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200">
+        {item.open_in_new_tab ? (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:scale-105 transition-transform duration-200"
+          >
+            {item.title}
+          </a>
+        ) : (
+          <Link
+            href={item.link}
+            className="flex items-center hover:scale-105 transition-transform duration-200 p-2 hover:border-gray-900 border border-transparent rounded-md"
+          >
+            {item.title}
+            {hasChildren && (
+              <svg
+                className={`w-4 h-4 ml-1 transition-transform duration-200 ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            )}
+          </Link>
+        )}
+      </div>
 
-      {secondaryNav.length > 0 && isHovered && (
-        <div className="secondary-nav absolute left-0 ml-4 mt-2 bg-white shadow-md rounded-md">
-          {secondaryNav.map((subItem) => (
+      {hasChildren && (
+        <div
+          className={`absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg py-1 z-50 transition-all duration-200 transform origin-top ${
+            isOpen
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+          }`}
+        >
+          {item.children?.map((child) => (
             <Link
-              href={subItem.link || '#'}
-              key={subItem.title}
-              target={subItem.open_in_new_tab ? '_blank' : ''}
-              className="group inline-flex h-10 w-full items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-zinc-50 dark:hover:bg-zinc-800 md:w-max"
+              key={child.title}
+              href={child.link}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
             >
-              {subItem.title}
+              {child.title}
             </Link>
           ))}
         </div>

@@ -23,44 +23,54 @@ export default async function Footer() {
   };
 
   return (
-    <nav className="pb-8 md:my-10 mx-auto flex flex-col lg:flex-row items-center justify-between container w-full">
-      <div className="my-8">
-        <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+    <footer className="container mx-auto pb-12 flex flex-col items-center border-t-2 border-gray-200 border-b-2 dark:border-gray-800 mt-16">
+      <div className="w-full flex justify-center dark:border-gray-800 mb-16">
+        <NavMenu
+          query={{ type: "navigation-menus", slug: "footer" }}
+          className="flex flex-row gap-8"
+        />
       </div>
-      <div className="flex mb-6 lg:mb-0 gap-x-8 justify-center text-zinc-700 dark:text-zinc-300">
-        <div>
-          <a
-            href={`mailto:${settings.metadata.email}`}
-            className={buttonVariants({ variant: "outline" })}
-          >
-            <MailIcon className="w-4 inline-block mr-2" />
-            Email us
-          </a>
+
+      <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-16">
+        <div className="flex gap-x-8 text-zinc-700 dark:text-zinc-300">
+          <div>
+            <a
+              href={`mailto:${settings.metadata.email}`}
+              className={buttonVariants({ variant: "outline" })}
+            >
+              <MailIcon className="w-4 inline-block mr-2" />
+              Email us
+            </a>
+          </div>
+          <div>
+            <a
+              href={`tel:${settings.metadata.phone}`}
+              className={buttonVariants({ variant: "outline" })}
+            >
+              <PhoneIcon className="w-4 inline-block mr-2" />
+              Call us
+            </a>
+          </div>
         </div>
-        <div>
-          <a
-            href={`tel:${settings.metadata.phone}`}
-            className={buttonVariants({ variant: "outline" })}
-          >
-            <PhoneIcon className="w-4 inline-block mr-2" />
-            Call us
-          </a>
-        </div>
-      </div>
-      <div className="flex gap-x-8 justify-center mb-6 lg:mb-0">
-        {settings.metadata.links.map((link: Link) => {
-          return (
-            <a href={link.url} key={link.url} target="_blank" rel="noreferrer">
+
+        <div className="flex flex-wrap gap-x-8 mr-10">
+          {settings.metadata.links.map((link: Link, index: number) => (
+            <a
+              key={`${link.url}-${index}`}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 className="h-[26px]"
                 src={`${link.icon.imgix_url}?w=500&auto=format,compression`}
                 alt={link.company}
               />
             </a>
-          );
-        })}
+          ))}
+        </div>
+        <ModeToggle />
       </div>
-      <ModeToggle />
-    </nav>
+    </footer>
   );
 }

@@ -1,4 +1,7 @@
 import { cosmic } from "@/cosmic/client";
+import { ContactButton } from "@/components/ContactButton";
+import { TalkToSales } from "@/components/TalkToSales";
+
 export const revalidate = 0;
 export default async function pos() {
   const { object: pos } = await cosmic.objects
@@ -21,12 +24,8 @@ export default async function pos() {
             Integrate your business into the digital world today!
           </p>
           <div className="flex gap-4">
-            <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700">
-              Get your offer
-            </button>
-            <button className="bg-white text-blue-600 py-2 px-6 border border-blue-600 rounded-md hover:bg-blue-50">
-              Talk to sales
-            </button>
+            <ContactButton className="bg-blue-700 text-white" />
+            <TalkToSales />
           </div>
         </div>
 
@@ -64,7 +63,8 @@ export default async function pos() {
             </div>
             <h3 className="text-xl font-semibold"> Apple / Google wallet</h3>
             <p className="text-gray-600">
-            Apple and Google Wallet support the use of digital membership cards for added convenience
+              Apple and Google Wallet support the use of digital membership
+              cards for added convenience
             </p>
           </div>
 
@@ -95,14 +95,15 @@ export default async function pos() {
             </div>
             <h3 className="text-xl font-semibold">Gift Card</h3>
             <p className="text-gray-600">
-            Purchase or transfer gift cards online (online payment, invite to receive rewards).
+              Purchase or transfer gift cards online (online payment, invite to
+              receive rewards).
             </p>
           </div>
         </div>
       </section>
 
       {/* Third Section */}
-      <section className="flex flex-col md:flex-row justify-between items-center">
+      <section className="flex flex-col pt-10 md:flex-row justify-between items-center">
         {/* Left Side - Image */}
         <div className="flex-1 flex justify-center">
           <img
@@ -113,7 +114,7 @@ export default async function pos() {
         </div>
 
         {/* Right Side - Text */}
-        <div className="flex-1 mb-8 md:mb-0">
+        <div className="flex-1 mb-10 md:mb-0">
           <h2 className="text-3xl font-bold mb-4">
             One system at the core of your business
           </h2>
@@ -143,9 +144,6 @@ export default async function pos() {
             The Complete Retail Solution includes POS software, terminal with
             built-in printer, and cash drawer - everything you need to trade.
           </p>
-          <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 mt-6">
-            Get your offer
-          </button>
         </div>
       </section>
 
@@ -178,10 +176,9 @@ export default async function pos() {
               ✔ Provide the payment options that work best for you and your
               customers
             </li>
-            <li>
-              ✔ Manage multi-site trading with ease.
-            </li>
+            <li>✔ Manage multi-site trading with ease.</li>
           </ul>
+          <ContactButton className="bg-blue-700 mt-4 hover:bg-blue-700/85 hover:text-white  text-white border-none hover:scale-105 transition-all" />
         </div>
 
         {/* Right Side - Image */}
@@ -199,9 +196,9 @@ export default async function pos() {
           {/* Left: Image */}
           <div className="relative">
             <img
-              src="/path/to/kitchen-image.jpg"
-              alt="Real-time Kitchen Management"
-              className="rounded-lg shadow-lg"
+              src={`${pos.metadata.posimg4.imgix_url}`}
+              alt="POS system on tablet"
+              className="w-full max-w-md h-auto"
             />
           </div>
           {/* Right: Text Content */}
@@ -247,20 +244,19 @@ export default async function pos() {
               </li>
               <li>Air card machine with Adatop Payments</li>
               <li>High-quality, secure all-metal cash drawer</li>
-              <li>
-                Hardware add-ons to complete your system
-              </li>
+              <li>Hardware add-ons to complete your system</li>
             </ul>
             <p className="mt-6 text-gray-700">
-              Running a larger hospitality business with multiple sites?We are also good at this!
+              Running a larger hospitality business with multiple sites?We are
+              also good at this!
             </p>
           </div>
           {/* Right: Image */}
           <div className="relative">
             <img
-              src="/path/to/pos-hardware.jpg"
-              alt="Hospitality POS Hardware"
-              className="rounded-lg shadow-lg"
+              src={`${pos.metadata.posimg5.imgix_url}`}
+              alt="POS system on tablet"
+              className="w-full max-w-md h-auto"
             />
           </div>
         </div>
@@ -272,9 +268,7 @@ export default async function pos() {
             Got multiple hospitality businesses? Try Adapos Enterprise!
           </h2>
           <div className="flex justify-center gap-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700">
-              Request a Demon
-            </button>
+            <ContactButton text="Request a Demon" />
           </div>
         </div>
       </section>
