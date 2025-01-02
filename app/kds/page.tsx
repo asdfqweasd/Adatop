@@ -20,7 +20,7 @@ export default async function kds() {
         {kds.metadata.p1}
       </p>
 
-      <div className="flex justify-center gap-12 w-full mb-16">
+      <div className="flex flex-col md:flex-row justify-center gap-12 w-full mb-16">
         <div className="flex-1 max-w-xl h-[400px] flex items-center justify-center rounded-lg shadow-lg bg-white dark:bg-gray-800">
           <img
             src={`${kds.metadata.image_gif[0].imgix_url}?w=1600&fm=gif`}
@@ -28,7 +28,8 @@ export default async function kds() {
             className="max-h-full max-w-full object-contain rounded-lg"
           />
         </div>
-        <div className="flex-1 max-w-xl h-[400px] flex items-center justify-center rounded-lg shadow-lg bg-white dark:bg-gray-800">
+
+        <div className="flex-1 max-w-xl h-[400px] items-center justify-center rounded-lg shadow-lg bg-white dark:bg-gray-800 hidden md:flex">
           <img
             src={`${kds.metadata.image_right.imgix_url}?w=1600&auto=format,compression`}
             alt={kds.metadata.title}

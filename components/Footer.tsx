@@ -24,15 +24,16 @@ export default async function Footer() {
 
   return (
     <footer className="container mx-auto pb-12 flex flex-col items-center border-t-2 border-gray-200 border-b-2 dark:border-gray-800 mt-16">
-      <div className="w-full flex justify-center dark:border-gray-800 mb-16">
+      <div className="w-full justify-center hidden md:flex dark:border-gray-800 mb-16">
         <NavMenu
           query={{ type: "navigation-menus", slug: "footer" }}
           className="flex flex-row gap-8"
         />
       </div>
+      
 
       <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-16">
-        <div className="flex gap-x-8 text-zinc-700 dark:text-zinc-300">
+        <div className=" mt-8 ml-10 flex gap-x-14 text-zinc-700 dark:text-zinc-300">
           <div>
             <a
               href={`mailto:${settings.metadata.email}`}
