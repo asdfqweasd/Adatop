@@ -66,6 +66,11 @@ export async function NavMenu({
           link: "https://forms.gle/webvDG4LrSE5k6xCA",
           open_in_new_tab: false,
         },
+        {
+          title: "Direct Debit",
+          link: "https://bsgplpiyx7cn.sg.larksuite.com/file/GVVkbxdK7oT2jUxe2tBllOakgUe",
+          open_in_new_tab: false,
+        },
       ];
       return { ...item, children };
     }
