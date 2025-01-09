@@ -11,6 +11,7 @@ export type ItemType = {
   open_in_new_tab: boolean;
   children?: ItemType[];
   secondarynav?: string;
+  type?: 'pdf' | 'form' | 'link';
 };
 
 interface NavMenuProps {
@@ -51,6 +52,7 @@ export async function NavMenu({
         title: hardware.title,
         link: `/${hardware.slug}`,
         open_in_new_tab: false,
+        type: 'link'
       }));
       return { ...item, children };
     }
@@ -58,23 +60,26 @@ export async function NavMenu({
       const children = [
         {
           title: "Account Form",
-          link: "https://forms.gle/SBZVbGKYkq1KWJpT7",
-          open_in_new_tab: false,
+          link: "https://forms.gle/iM2iMB2Kx1B2QTfR6",
+          open_in_new_tab: true,
+          type: 'false'
         },
         {
           title: "Adapay Form",
-          link: "https://forms.gle/webvDG4LrSE5k6xCA",
-          open_in_new_tab: false,
+          link: "https://forms.gle/jc1xWbfJEvN8FdPX6",
+          open_in_new_tab: true,
+          type: 'form'
         },
         {
           title: "Direct Debit",
-          link: "https://bsgplpiyx7cn.sg.larksuite.com/file/GVVkbxdK7oT2jUxe2tBllOakgUe",
+          link: "/pdf/debit.pdf",
           open_in_new_tab: false,
+          type: 'pdf'
         },
       ];
       return { ...item, children };
     }
-    return item;
+    return { ...item, type: 'link' };
   });
 
   return (
