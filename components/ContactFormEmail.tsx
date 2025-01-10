@@ -32,7 +32,9 @@ export default function ContactFormEmail({
   return (
     <Html>
       <Head />
-      <Preview>New Contact Form Submission from {firstName} {lastName}</Preview>
+      <Preview>
+        New Contact Form Submission from {firstName} {lastName}
+      </Preview>
       <Tailwind>
         <Body className="bg-gray-100 text-black">
           <Container>
@@ -40,12 +42,26 @@ export default function ContactFormEmail({
               <Heading className="leading-tight">
                 New Contact Form Submission
               </Heading>
-              <Text><strong>From:</strong> {firstName} {lastName}</Text>
-              {company && <Text><strong>Company:</strong> {company}</Text>}
-              {phone && <Text><strong>Phone:</strong> {phone}</Text>}
-              <Text><strong>Email:</strong> {email}</Text>
+              <Text>
+                <strong>From:</strong> {firstName} {lastName}
+              </Text>
+              {company && (
+                <Text>
+                  <strong>Company:</strong> {company}
+                </Text>
+              )}
+              {phone && (
+                <Text>
+                  <strong>Phone:</strong> {phone}
+                </Text>
+              )}
+              <Text>
+                <strong>Email:</strong> {email}
+              </Text>
               <Hr />
-              <Text><strong>Message:</strong></Text>
+              <Text>
+                <strong>Message:</strong>
+              </Text>
               <Text>{message}</Text>
             </Section>
           </Container>
