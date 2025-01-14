@@ -3,7 +3,6 @@ import { HardwareList } from "@/cosmic/blocks/hardware/HardwareList";
 import { cosmic } from "@/cosmic/client";
 import { ClientHero } from "@/components/ClientHero";
 export default async function Hardware() {
-
   const { object: page } = await cosmic.objects
     .findOne({
       type: "pages",
@@ -16,8 +15,7 @@ export default async function Hardware() {
 
   return (
     <main className="p-4">
-      <section className="md:container pb-8 m-auto">
-        
+      <section className="md:container pb-8 m-auto dark:bg-black">
         <ClientHero pageData={page} />
 
         {/* Hardware List Section */}

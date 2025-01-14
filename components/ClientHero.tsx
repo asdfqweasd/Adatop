@@ -1,4 +1,3 @@
-// ClientHero.tsx
 "use client";
 import Image from "next/image";
 import { ContactButton } from "@/components/ContactButton";
@@ -30,19 +29,19 @@ interface ClientHeroProps {
 
 export function ClientHero({ pageData }: ClientHeroProps) {
   return (
-    <div className="bg-gray-50 flex items-center justify-center pb-6">
+    <div className="bg-gray-50 flex items-center justify-center pb-6 dark:bg-black transition-colors duration-300">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Text section */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-gray-600 uppercase">
+            <h4 className="text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">
               New to AdaPos
             </h4>
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
               {pageData.metadata.h1}
               <br /> {pageData.metadata.section_title}
             </h1>
-            <p className="text-lg text-gray-700 w-[71%]">
+            <p className="text-lg text-gray-700 dark:text-gray-300 w-[71%]">
               {pageData.metadata.subheadline}
             </p>
             <div className="flex space-x-4">
@@ -60,7 +59,7 @@ export function ClientHero({ pageData }: ClientHeroProps) {
                   width={500}
                   height={500}
                   priority
-                  className="rounded-lg w-full h-auto object-cover"
+                  className="rounded-lg w-full h-auto object-cover shadow-md dark:shadow-none"
                 />
               </div>
             </div>
@@ -75,7 +74,7 @@ export function ClientHero({ pageData }: ClientHeroProps) {
                       width={300}
                       height={300}
                       loading="lazy"
-                      className="rounded-lg w-full h-auto object-cover"
+                      className="rounded-lg w-full h-auto object-cover shadow-md dark:shadow-none"
                     />
                   </div>
                 </div>

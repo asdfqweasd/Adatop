@@ -26,20 +26,13 @@ const cards = [
     text: "Direct debit Form",
     onButtonClick: () => {
       window.open("/pdf/debit.pdf", "_blank");
-
-      // const element = document.createElement("a");
-      // element.href = "/pdf/debit.pdf";
-      // element.download = "debit-form.pdf";
-      // document.body.appendChild(element);
-      // element.click();
-      // document.body.removeChild(element);
     },
   },
 ];
 
 const OnboardingPage = () => {
   return (
-    <main className="p-4 flex flex-col justify-center items-center">
+    <main className="p-4 flex flex-col justify-center items-center bg-white dark:bg-black">
       <div className="relative m-auto flex max-w-[950px] flex-col items-center sm:items-start gap-2">
         <div className="flex justify-between w-full items-baseline mb-4">
           <h1 className="text-center sm:text-left md:mx-0 text-3xl md:text-6xl font-display text-zinc-900 dark:text-zinc-100 leading-tight tracking-tighter">

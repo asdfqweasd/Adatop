@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from "@/cosmic/elements/Button";
 import React from "react";

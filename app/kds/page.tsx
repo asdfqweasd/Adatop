@@ -12,7 +12,7 @@ export default async function kds() {
   if (!kds) return <div>Something went wrong</div>;
 
   return (
-    <main className="p-8 min-h-screen flex flex-col items-center bg-gray-50 dark:bg-gray-900">
+    <main className="p-8 min-h-screen flex flex-col items-center bg-gray-50 dark:bg-black">
       <h1 className="mt-4 text-4xl text-center mb-6 font-extrabold text-gray-800 dark:text-gray-100">
         {kds.metadata.title}
       </h1>

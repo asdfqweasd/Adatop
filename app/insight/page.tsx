@@ -14,7 +14,7 @@ export default async function Insight() {
   if (!insight) return <div>Something went wrong</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       <div className="p-16 pt-32 flex flex-col items-center max-w-7xl mx-auto">
         <h1 className="text-6xl text-center mb-4 text-gray-800 dark:text-gray-100">
           <span className="block mb-4">
@@ -32,7 +32,7 @@ export default async function Insight() {
         </div>
       </div>
 
-      <section className="py-20 bg-white dark:bg-gray-800">
+      <section className="py-20 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-10 px-4">

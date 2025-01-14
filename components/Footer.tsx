@@ -30,7 +30,6 @@ export default async function Footer() {
           className="flex flex-row gap-8"
         />
       </div>
-      
 
       <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-16">
         <div className=" mt-8 ml-10 flex gap-x-14 text-zinc-700 dark:text-zinc-300">
@@ -63,7 +62,7 @@ export default async function Footer() {
               rel="noreferrer"
             >
               <img
-                className="h-[26px]"
+                className="h-[26px]  dark:filter dark:invert"
                 src={`${link.icon.imgix_url}?w=500&auto=format,compression`}
                 alt={link.company}
               />
