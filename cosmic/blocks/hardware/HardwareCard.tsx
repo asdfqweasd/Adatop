@@ -36,14 +36,14 @@ export function HardwareCard({
       </div>
       <div className="mt-2 flex justify-between">
         <div>
-          <h3 className="text-sm text-zinc-700 dark:text-zinc-300">
+          <h3 className=" texl-sm text-zinc-700 dark:text-zinc-300">
             <span aria-hidden="true" className="absolute inset-0"></span>
             {Hardware.title}
           </h3>
         </div>
-        <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+        {/* <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
           ${Hardware.metadata.price.toLocaleString("en-US")}
-        </p>
+        </p> */}
       </div>
     </Link>
   );

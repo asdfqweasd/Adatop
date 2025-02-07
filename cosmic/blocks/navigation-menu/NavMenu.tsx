@@ -11,7 +11,7 @@ export type ItemType = {
   open_in_new_tab: boolean;
   children?: ItemType[];
   secondarynav?: string;
-  type?: 'pdf' | 'form' | 'link';
+  type?: "pdf" | "form" | "link";
 };
 
 interface NavMenuProps {
@@ -52,34 +52,34 @@ export async function NavMenu({
         title: hardware.title,
         link: `/${hardware.slug}`,
         open_in_new_tab: false,
-        type: 'link'
+        type: "link",
       }));
       return { ...item, children };
     }
-    if (item.title === "Onboarding") {
+    if (item.title === "Help") {
       const children = [
+        // {
+        //   title: "Account Form",
+        //   link: "https://forms.gle/iM2iMB2Kx1B2QTfR6",
+        //   open_in_new_tab: true,
+        //   type: "false",
+        // },
         {
-          title: "Account Form",
-          link: "https://forms.gle/iM2iMB2Kx1B2QTfR6",
-          open_in_new_tab: true,
-          type: 'false'
-        },
-        {
-          title: "Adapay Form",
+          title: "KYC Form",
           link: "https://forms.gle/jc1xWbfJEvN8FdPX6",
           open_in_new_tab: true,
-          type: 'form'
+          type: "form",
         },
         {
-          title: "Direct Debit",
-          link: "/pdf/debit.pdf",
+          title: "Pos Handbook_EN",
+          link: "/pdf/adatop_handbook.pdf",
           open_in_new_tab: false,
-          type: 'pdf'
+          type: "pdf",
         },
       ];
       return { ...item, children };
     }
-    return { ...item, type: 'link' };
+    return { ...item, type: "link" };
   });
 
   return (

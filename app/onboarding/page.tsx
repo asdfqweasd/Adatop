@@ -23,9 +23,9 @@ const cards = [
   {
     id: 3,
     imageSrc: "/image/debit.png",
-    text: "Direct debit Form",
+    text: "Handbook",
     onButtonClick: () => {
-      window.open("/pdf/debit.pdf", "_blank");
+      window.open("/pdf/adatop_handbook.pdf", "_blank");
     },
   },
 ];
