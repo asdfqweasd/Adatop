@@ -26,7 +26,7 @@ export async function Page({
         '<strong>$1</strong> <span class="line-through">$2</span>'
       )
       .replace(
-        /(NOW FROM) (\$\d+)/g,
+        /(BYO FROM) (\$\d+)/g,
         '<strong>$1</strong> <span class="text-pink-600 font-bold text-3xl">$2</span>'
       )
       .replace(/\n/g, "<br>");

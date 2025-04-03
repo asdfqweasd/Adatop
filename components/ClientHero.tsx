@@ -52,14 +52,14 @@ export function ClientHero({ pageData }: ClientHeroProps) {
           {/* Image section */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center justify-center">
-              <div className="w-full h-auto relative">
+              <div className="w-full h-[200px] relative">
                 <Image
                   src={pageData.metadata.image.imgix_url}
                   alt="Main POS Image"
                   width={500}
                   height={500}
                   priority
-                  className="rounded-lg w-full h-auto object-cover shadow-md dark:shadow-none"
+                  className="rounded-lg w-full h-full object-cover shadow-md dark:shadow-none"
                 />
               </div>
             </div>

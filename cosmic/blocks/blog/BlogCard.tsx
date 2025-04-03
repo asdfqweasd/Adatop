@@ -30,6 +30,7 @@ export function BlogCard({
   post: PostType;
   className?: string;
 }) {
+  console.log(post);
   return (
     <article className={className}>
       <Link

@@ -19,24 +19,24 @@ export default async function Header() {
       <div className="flex w-full items-center md:container justify-between p-4">
         <Link href="/">
           <img
-            src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
+            src={`${settings.metadata.logo.imgix_url}?w=700&auto=format,compression`}
             alt={settings.metadata.company}
-            className="h-10 m-auto dark:hidden"
+            className="h-16 m-auto dark:hidden"
           />
           <img
-            src={`${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression`}
+            src={`${settings.metadata.dark_logo.imgix_url}?w=700&auto=format,compression`}
             alt={settings.metadata.company}
-            className="h-10 m-auto hidden dark:block"
+            className="h-16 m-auto hidden dark:block"
           />
         </Link>
-          <div className="flex items-center">
-            <NavMenu
-              query={{ type: "navigation-menus", slug: "header" }}
-              hasMobileMenu
-              className="flex-row"
-            />
-            <CheckOut className="ml-4" productPath={"/services"} />
-          </div>
+        <div className="flex items-center">
+          <NavMenu
+            query={{ type: "navigation-menus", slug: "header" }}
+            hasMobileMenu
+            className="flex-row"
+          />
+          <CheckOut className="ml-4" productPath={"/services"} />
+        </div>
       </div>
     </nav>
   );
