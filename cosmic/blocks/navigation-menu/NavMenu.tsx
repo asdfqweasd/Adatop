@@ -11,7 +11,7 @@ export type ItemType = {
   open_in_new_tab: boolean;
   children?: ItemType[];
   secondarynav?: string;
-  type?: "pdf" | "form" | "link";
+  type?: "pdf" | "form" | "link" | "video";
 };
 
 interface NavMenuProps {
@@ -58,12 +58,6 @@ export async function NavMenu({
     }
     if (item.title === "Help") {
       const children = [
-        // {
-        //   title: "Account Form",
-        //   link: "https://forms.gle/iM2iMB2Kx1B2QTfR6",
-        //   open_in_new_tab: true,
-        //   type: "false",
-        // },
         {
           title: "KYC Form",
           link: "https://forms.gle/jc1xWbfJEvN8FdPX6",
@@ -75,6 +69,12 @@ export async function NavMenu({
           link: "/pdf/adatop_handbook.pdf",
           open_in_new_tab: false,
           type: "pdf",
+        },
+        {
+          title: "Pos Video",
+          link: "/handbook",
+          open_in_new_tab: false,
+          type: "link",
         },
       ];
       return { ...item, children };
