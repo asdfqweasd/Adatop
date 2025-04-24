@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { sendEmail } from "@/app/api/action/sendEmail";
 import SubmitBtn from "@/cosmic/elements/submit-btn";
@@ -41,23 +41,51 @@ export default function Contact({ onClose }: ContactProps) {
       .trim();
   };
 
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [onClose]);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  console.log("Contact form rendered, close function available:", !!onClose);
+
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      onClick={onClose}
     >
       <motion.div
-        className="bg-white max-w-md mx-auto dark:bg-gray-800 p-8 rounded-lg shadow-lg relative w-[min(70%,38rem)]"
+        className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg relative w-full max-w-md mx-auto"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
-          onClick={onClose}
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 p-2"
+          onClick={() => {
+            console.log("Close button clicked");
+            onClose();
+          }}
+          aria-label="Close"
         >
           <X size={24} />
         </button>
@@ -79,8 +107,8 @@ export default function Contact({ onClose }: ContactProps) {
           </div>
         )}
 
-        <form className="flex flex-col space-y-4 " onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4">
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               className="h-14 px-4 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               name="firstName"
@@ -112,16 +140,16 @@ export default function Contact({ onClose }: ContactProps) {
               name: "phone",
               required: true,
               className:
-                "h-14 pl-12 pr-4 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-full",
+                "h-14 pl-12 pr-4 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-base",
             }}
             containerClass="relative w-full"
-            dropdownClass="bg-white dark:bg-gray-700 text-black dark:text-white"
+            dropdownClass="bg-white dark:bg-gray-700 text-black dark:text-white max-h-60 overflow-y-auto"
             specialLabel=""
             placeholder="Phone"
             disableCountryCode={false}
             enableAreaCodes={true}
             autoFormat={false}
-            buttonClass="absolute left-0 top-0 bottom-0 flex items-center justify-center px-3"
+            buttonClass="absolute left-0 top-0 bottom-0 flex items-center justify-center px-3 z-10"
           />
 
           <input
@@ -140,7 +168,21 @@ export default function Contact({ onClose }: ContactProps) {
             maxLength={5000}
           />
 
-          <SubmitBtn />
+          <div className="flex space-x-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 h-14 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-1 h-14 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </motion.div>
     </motion.div>

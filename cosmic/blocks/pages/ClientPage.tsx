@@ -45,7 +45,7 @@ export default function ClientPage({
                 className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700"
                 onClick={handleOpenForm}
               >
-                Email Us
+                Book a Demo
               </button>
 
               {/* Contact Form Modal */}

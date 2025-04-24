@@ -1,35 +1,21 @@
 import { cosmic } from "@/cosmic/client";
-import { Testimonial, TestimonialType } from "./Testimonial";
-export const revalidate = 0; 
-export async function Testimonials({
-  query,
-  sort,
-  limit,
-  skip,
-  className,
-  status,
-}: {
+import { TestimonialClientComponent } from "./TestimonialClientComponent";
+
+interface TestimonialsProps {
   query: any;
-  sort?: string;
-  limit?: number;
-  skip?: number;
-  className?: string;
   status?: "draft" | "published" | "any";
-}) {
+}
+
+export async function Testimonials({ query, status }: TestimonialsProps) {
   const { objects: testimonials } = await cosmic.objects
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .sort(sort ? sort : "-order")
-    .limit(limit ? limit : 100)
-    .skip(skip ? skip : 0)
     .status(status ? status : "published");
 
-  return (
-    <div className={className}>
-      {testimonials?.map((testimonial: TestimonialType) => {
-        return <Testimonial testimonial={testimonial} key={testimonial.slug} />;
-      })}
-    </div>
-  );
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
+
+  return <TestimonialClientComponent testimonials={testimonials} />;
 }

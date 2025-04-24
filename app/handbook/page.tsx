@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { pos_AndroidLink, fetchVideoLinksFromAPI } from "@/lib/data";
+import React from "react";
 
 interface VideoItem {
   name: string;
@@ -19,15 +20,120 @@ interface LanguageData {
 
 function getYouTubeVideoId(url: string): string {
   try {
-    // 尝试从URL中提取视频ID
     const urlObj = new URL(url);
     const videoId = urlObj.searchParams.get("v");
     return videoId || "";
   } catch (e) {
-    // 如果URL解析失败，可能是直接提供的视频ID
     console.error("无法解析YouTube URL:", url);
     return url;
   }
+}
+
+// 提取出导航组件
+function NavigationMenu({
+  language,
+  currentItems,
+  indexOfFirstItem,
+  currentPage,
+  totalPages,
+  handleScrollToVideo,
+  handlePrevPage,
+  handleNextPage,
+  handleScrollToTop,
+  isMobile = false,
+}: {
+  language: keyof LanguageData;
+  currentItems: VideoItem[];
+  indexOfFirstItem: number;
+  currentPage: number;
+  totalPages: number;
+  handleScrollToVideo: (index: number) => void;
+  handlePrevPage: () => void;
+  handleNextPage: () => void;
+  handleScrollToTop: () => void;
+  isMobile?: boolean;
+}) {
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mx-auto">
+      <h2 className="font-bold text-2xl mb-4 truncate text-gray-900 dark:text-gray-100">
+        {language.startsWith("zh") ? "导航" : "Navigation"}
+      </h2>
+      <ul className="space-y-2 mb-6 max-h-[50vh] overflow-y-auto">
+        {currentItems.map((video: VideoItem, index: number) => (
+          <li key={indexOfFirstItem + index}>
+            <button
+              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-left w-full text-sm truncate"
+              onClick={() => handleScrollToVideo(indexOfFirstItem + index)}
+            >
+              {indexOfFirstItem + index + 1 + " : " + video.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-between items-center mb-4">
+        <button
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          {language.startsWith("zh") ? "上一页" : "Prev"}
+        </button>
+        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          {language.startsWith("zh") ? "下一页" : "Next"}
+        </button>
+      </div>
+      <button
+        className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300 w-full"
+        onClick={handleScrollToTop}
+      >
+        {language.startsWith("zh") ? "回到顶端" : "Scroll to Top"}
+      </button>
+    </div>
+  );
+}
+
+// 提取出分页控件组件
+function Pagination({
+  currentPage,
+  totalPages,
+  handlePrevPage,
+  handleNextPage,
+  language,
+}: {
+  currentPage: number;
+  totalPages: number;
+  handlePrevPage: () => void;
+  handleNextPage: () => void;
+  language: keyof LanguageData;
+}) {
+  return (
+    <div className="flex justify-between w-full max-w-md my-8">
+      <button
+        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        onClick={handlePrevPage}
+        disabled={currentPage === 1}
+      >
+        {language.startsWith("zh") ? "上一页" : "Previous"}
+      </button>
+      <span className="flex items-center font-semibold text-gray-900 dark:text-gray-100">
+        {currentPage} / {totalPages}
+      </span>
+      <button
+        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        onClick={handleNextPage}
+        disabled={currentPage === totalPages}
+      >
+        {language.startsWith("zh") ? "下一页" : "Next"}
+      </button>
+    </div>
+  );
 }
 
 export default function HandbookPage() {
@@ -127,29 +233,23 @@ export default function HandbookPage() {
 
   if (!language) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r ">
-        <h1 className="font-bold text-4xl my-8 text-center text-black">
+      <div className="flex flex-col items-center justify-start min-h-screen bg-gray-50 dark:bg-black pt-32">
+        <h1 className="font-bold text-4xl mb-8 text-center text-gray-900 dark:text-gray-100">
           Adatop User Manual
         </h1>
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-          <div className="relative group">
-            <button
-              className="bg-white text-blue-500 px-6 py-3 rounded-lg hover:bg-blue-100 transition duration-300 w-full sm:w-48"
-              onClick={() => handleLanguageChange("zh")}
-            >
-              选择中文视频
-            </button>
-            {/* 中文下拉菜单 */}
-          </div>
-          <div className="relative group">
-            <button
-              className="bg-white text-blue-500 px-6 py-3 rounded-lg hover:bg-blue-100 transition duration-300 w-full sm:w-60"
-              onClick={() => handleLanguageChange("en")}
-            >
-              Select English Videos
-            </button>
-            {/* 英文下拉菜单 */}
-          </div>
+          <button
+            className="bg-white dark:bg-gray-800 text-blue-500 dark:text-blue-400 px-6 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-300 w-full sm:w-48 shadow-md"
+            onClick={() => handleLanguageChange("zh")}
+          >
+            选择中文视频
+          </button>
+          <button
+            className="bg-white dark:bg-gray-800 text-blue-500 dark:text-blue-400 px-6 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-300 w-full sm:w-60 shadow-md"
+            onClick={() => handleLanguageChange("en")}
+          >
+            Select English Videos
+          </button>
         </div>
       </div>
     );
@@ -179,10 +279,16 @@ export default function HandbookPage() {
   ) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative max-w-md">
+        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative max-w-md mb-4">
           <strong className="font-bold">提示:</strong>
           <span className="block sm:inline"> 当前语言没有可用的视频</span>
         </div>
+        <button
+          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          onClick={() => setLanguage(null)}
+        >
+          返回语言选择
+        </button>
       </div>
     );
   }
@@ -196,61 +302,54 @@ export default function HandbookPage() {
   const totalPages = Math.ceil(pos_AndroidLink[language].length / itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r relative">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       <div className="relative z-10 flex flex-col items-center pt-8">
-        <h1 className="font-bold text-4xl my-8 text-center text-black">
+        <h1 className="font-bold text-4xl my-8 text-center text-gray-900 dark:text-gray-100">
           Adatop User Manual
         </h1>
-        {/* 导航栏在小屏幕时显示 */}
+
+        {/* 语言切换按钮 */}
+        <div className="flex flex-row space-x-4 mb-6">
+          <button
+            className={`px-4 py-2 rounded-lg transition duration-300 ${
+              language === "zh"
+                ? "bg-blue-500 text-white"
+                : "bg-white text-blue-500 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+            }`}
+            onClick={() => handleLanguageChange("zh")}
+          >
+            中文
+          </button>
+          <button
+            className={`px-4 py-2 rounded-lg transition duration-300 ${
+              language === "en"
+                ? "bg-blue-500 text-white"
+                : "bg-white text-blue-500 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+            }`}
+            onClick={() => handleLanguageChange("en")}
+          >
+            English
+          </button>
+        </div>
+
+        {/* 移动端导航 */}
         <div className="w-full max-w-96 mx-auto px-4 mt-8 lg:hidden">
-          <div className="bg-white rounded-lg shadow-lg p-6 mx-auto">
-            <h2 className="font-bold text-2xl mb-4 truncate">
-              {language.startsWith("zh") ? "导航" : "Navigation"}
-            </h2>
-            <ul className="space-y-2 mb-6 max-h-[50vh] overflow-y-auto">
-              {currentItems.map((video: VideoItem, index: number) => (
-                <li key={indexOfFirstItem + index}>
-                  <button
-                    className="text-blue-500 hover:text-blue-700 text-left w-full text-sm truncate"
-                    onClick={() =>
-                      handleScrollToVideo(indexOfFirstItem + index)
-                    }
-                  >
-                    {indexOfFirstItem + index + 1 + " : " + video.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="flex justify-between items-center mb-4">
-              <button
-                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
-                onClick={handlePrevPage}
-                disabled={currentPage === 1}
-              >
-                {language.startsWith("zh") ? "上一页" : "Prev"}
-              </button>
-              <span className="text-sm font-semibold">
-                {currentPage} / {totalPages}
-              </span>
-              <button
-                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                {language.startsWith("zh") ? "下一页" : "Next"}
-              </button>
-            </div>
-            <button
-              className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300 w-full"
-              onClick={handleScrollToTop}
-            >
-              {language.startsWith("zh") ? "回到顶端" : "Scroll to Top"}
-            </button>
-          </div>
+          <NavigationMenu
+            language={language}
+            currentItems={currentItems}
+            indexOfFirstItem={indexOfFirstItem}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handleScrollToVideo={handleScrollToVideo}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+            handleScrollToTop={handleScrollToTop}
+            isMobile={true}
+          />
           {/* 回到顶部按钮 */}
           <button
             onClick={handleScrollToTop}
-            className="fixed bottom-4 right-4 bg-black text-white py-3 w-10 mb-8 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 z-10"
+            className="fixed bottom-4 right-4 bg-blue-500 text-white py-3 w-10 mb-8 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 z-10"
           >
             ⬆
           </button>
@@ -262,111 +361,71 @@ export default function HandbookPage() {
 
             {/* 视频容器 */}
             <div className="video-container w-full flex flex-col items-center space-y-10">
-              {currentItems.map((video: VideoItem, index: number) => (
-                <div
-                  key={indexOfFirstItem + index}
-                  ref={(el) => {
-                    videoRefs.current[indexOfFirstItem + index] = el;
-                  }}
-                  className="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden"
-                >
-                  <h2 className="text-xl font-semibold text-center py-4 bg-gray-200">
-                    {indexOfFirstItem + index + 1 + " : " + video.name}
-                  </h2>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="450"
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.value)}?vq=hd1080`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="mx-auto"
-                    ></iframe>
-                    <div className="text-center mt-2">
-                      <a
-                        href={video.value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
-                      >
-                        {language.startsWith("zh")
-                          ? "在YouTube上观看"
-                          : "Watch on YouTube"}
-                      </a>
+              {currentItems.map((video: VideoItem, index: number) => {
+                const itemIndex = indexOfFirstItem + index;
+                return (
+                  <div
+                    key={itemIndex}
+                    ref={(el) => {
+                      videoRefs.current[itemIndex] = el;
+                    }}
+                    className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+                  >
+                    <h2 className="text-xl font-semibold text-center py-4 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                      {itemIndex + 1 + " : " + video.name}
+                    </h2>
+                    <div>
+                      <iframe
+                        width="100%"
+                        height="450"
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                          video.value
+                        )}?vq=hd1080`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="mx-auto"
+                      ></iframe>
+                      <div className="text-center mt-2">
+                        <a
+                          href={video.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                        >
+                          {language.startsWith("zh")
+                            ? "在YouTube上观看"
+                            : "Watch on YouTube"}
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* 分页控制 */}
-            <div className="flex justify-between w-full max-w-md my-8">
-              <button
-                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                onClick={handlePrevPage}
-                disabled={currentPage === 1}
-              >
-                {language.startsWith("zh") ? "上一页" : "Previous"}
-              </button>
-              <span className="flex items-center font-semibold">
-                {currentPage} / {totalPages}
-              </span>
-              <button
-                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                {language.startsWith("zh") ? "下一页" : "Next"}
-              </button>
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePrevPage={handlePrevPage}
+              handleNextPage={handleNextPage}
+              language={language}
+            />
           </div>
 
-          {/* 导航栏在大屏幕时显示 */}
+          {/* 桌面端导航 */}
           <div className="hidden lg:block lg:w-80 mt-8 lg:mt-0 fixed right-4 top-1/2 transform -translate-y-1/2">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="font-bold text-2xl mb-4">
-                {language.startsWith("zh") ? "导航" : "Navigation"}
-              </h2>
-              <ul className="space-y-2 mb-6 max-h-[50vh] overflow-y-auto">
-                {currentItems.map((video: VideoItem, index: number) => (
-                  <li key={indexOfFirstItem + index}>
-                    <button
-                      className="text-blue-500 hover:text-blue-700 text-left w-full text-sm truncate"
-                      onClick={() =>
-                        handleScrollToVideo(indexOfFirstItem + index)
-                      }
-                    >
-                      {indexOfFirstItem + index + 1 + " : " + video.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex justify-between items-center mb-4">
-                <button
-                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}
-                >
-                  {language.startsWith("zh") ? "上一页" : "Prev"}
-                </button>
-                <span className="text-sm font-semibold">
-                  {currentPage} / {totalPages}
-                </span>
-                <button
-                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                >
-                  {language.startsWith("zh") ? "下一页" : "Next"}
-                </button>
-              </div>
-              <button
-                className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300 w-full"
-                onClick={handleScrollToTop}
-              >
-                {language.startsWith("zh") ? "回到顶端" : "Scroll to Top"}
-              </button>
-            </div>
+            <NavigationMenu
+              language={language}
+              currentItems={currentItems}
+              indexOfFirstItem={indexOfFirstItem}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handleScrollToVideo={handleScrollToVideo}
+              handlePrevPage={handlePrevPage}
+              handleNextPage={handleNextPage}
+              handleScrollToTop={handleScrollToTop}
+            />
           </div>
         </div>
       </div>

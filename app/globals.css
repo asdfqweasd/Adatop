@@ -85,3 +85,23 @@
 .custom-zoom img {
   @apply rounded-2xl;
 }
+
+/* 自定义Swiper导航按钮
+.swiper-button-next,
+.swiper-button-prev {
+  color: #3b82f6 !important;
+  background: rgba(255, 255, 255, 0.8);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+} */
+
+/* 自定义分页指示器 */
+.swiper-pagination-bullet {
+  background: #3b82f6 !important;
+}
