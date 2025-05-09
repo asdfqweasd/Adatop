@@ -10,27 +10,6 @@ export default async function posmachines() {
     .depth(1);
   if (!posmachines) return <div>Something went wrong</div>;
 
-  // return (
-  //   // <div>
-  //   //   <h1>{posmachines.metadata.machines[0].title}</h1>
-  //   //   <p>{posmachines.metadata.machines[0].price}</p>
-  //   //   <p>{posmachines.metadata.machines[0].description}</p>
-  //   //   <img
-  //   //     src={`${posmachines.metadata.machines[0].img1.imgix_url}?w=1600&auto=format,compression`}
-  //   //     alt={posmachines.metadata.machines[0].title}
-  //   //     className="w-full h-auto"
-  //   //   />
-  //   // </div>
-  //   <div>
-  //     <h1>POS Machines {}</h1>
-  //     {posmachines?.map((machine: any) => (
-  //       <div key={machine.id}>
-  //         <h1>{machine.title}</h1>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
-
   return (
     <main className="p-4">
       <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">

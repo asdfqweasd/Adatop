@@ -65,17 +65,17 @@ export default function Contact({ onClose }: ContactProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4 overflow-y-auto mt-16 sm:mt-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
     >
       <motion.div
-        className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg relative w-full max-w-md mx-auto"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg relative w-full max-w-md mx-auto my-4"
+        initial={{ scale: 0.9, opacity: 0, y: 50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 50 }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -95,8 +95,8 @@ export default function Contact({ onClose }: ContactProps) {
         </h2>
         <p className="text-gray-700 dark:text-white/80 mb-6">
           Please contact me directly at{" "}
-          <a className="underline" href="mailto:support@adatop.com.au">
-            support@adatop.com.au
+          <a className="underline" href="mailto:pos@adatop.com.au">
+            pos@adatop.com.au
           </a>{" "}
           or through this form.
         </p>

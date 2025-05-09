@@ -26,7 +26,9 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
   return (
     <>
       <button
-        className={`bg-orange-500 text-white py-2 px-6 rounded-md border-2 border-transparent hover:bg-white hover:text-black hover:border-black ${className}`}
+        className={`
+  bg-orange-500 text-white 
+      py-2 px-6 rounded-md border-2 border-transparent hover:bg-white hover:text-black hover:border-black ${className}`}
         onClick={handleOpenForm}
       >
         {text}
