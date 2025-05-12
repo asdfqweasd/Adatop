@@ -47,7 +47,7 @@ export async function NavMenu({
     .status(status ? status : "published");
 
   const processedItems = nav.metadata.items.map((item: ItemType) => {
-    if (item.title === "Products") {
+    if (item.title === "Adapos") {
       const children = Hardwares.map((hardware: HardwareItem) => ({
         title: hardware.title,
         link: `/${hardware.slug}`,
