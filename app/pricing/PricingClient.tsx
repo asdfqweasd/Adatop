@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ContactModal } from "./ContactModal";
+import { motion } from "framer-motion";
 
 interface Machine {
   img: {
@@ -23,8 +24,26 @@ interface PricingClientProps {
   machines: Series[];
 }
 
+// 提取按钮样式为常量
+const BUTTON_STYLES = {
+  basic:
+    "w-full bg-[#15803D] text-white py-2 rounded-lg hover:bg-[#166534] transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg",
+  pro: "w-full bg-gradient-to-r from-[#EA580C] to-[#F97316] text-white py-2 rounded-lg hover:from-[#C2410C] hover:to-[#EA580C] transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg",
+  enterprise:
+    "w-full bg-gradient-to-br from-[#111827] to-[#5B5B5B] text-white py-2 rounded-lg hover:from-[#0F172A] hover:to-[#4B4B4B] transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg",
+  custom:
+    "inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-[#EA580C] to-[#F97316] hover:from-[#C2410C] hover:to-[#EA580C] shadow-lg hover:shadow-xl transition-all duration-300",
+};
+
+// 提取动画配置为常量
+const MOTION_CONFIG = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 },
+};
+
 export default function PricingClient({ machines }: PricingClientProps) {
-  console.log("machines:", machines[0].metadata.machines);
   const [isYearly, setIsYearly] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -43,13 +62,43 @@ export default function PricingClient({ machines }: PricingClientProps) {
     },
   };
 
-  const handleOpenForm = () => {
-    setIsFormOpen(true);
-  };
+  const handleOpenForm = () => setIsFormOpen(true);
+  const handleCloseForm = () => setIsFormOpen(false);
 
-  const handleCloseForm = () => {
-    setIsFormOpen(false);
-  };
+  // 提取机器卡片渲染函数
+  const renderMachineCard = (machine: Machine, index: number) => (
+    <div
+      key={index}
+      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
+    >
+      <div className="h-48 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
+        <img
+          src={machine.img.url}
+          alt={machine.text.split("<h3>")[1]?.split("</h3>")[0] || ""}
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: machine.text }} />
+    </div>
+  );
+
+  // 提取系列渲染函数
+  const renderSeries = (seriesSlug: string, title: string) => (
+    <div className="mb-16">
+      <h3 className="text-2xl font-bold mb-8 text-center">{title}</h3>
+      <div className="grid md:grid-cols-3 gap-8">
+        {machines && machines.length > 0 ? (
+          machines
+            .find((series) => series.slug === seriesSlug)
+            ?.metadata.machines.map(renderMachineCard)
+        ) : (
+          <div className="col-span-3 text-center text-gray-500">
+            No products found
+          </div>
+        )}
+      </div>
+    </div>
+  );
 
   return (
     <div className="container mx-auto px-4">
@@ -63,144 +112,13 @@ export default function PricingClient({ machines }: PricingClientProps) {
             </p>
           </div>
 
-          {/* POS Series */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center">POS Series</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              {machines && machines.length > 0 ? (
-                machines
-                  .find((series) => series.slug === "pos-series")
-                  ?.metadata.machines.map((machine: Machine, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                      <div className="h-48 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
-                        <img
-                          src={machine.img.url}
-                          alt={
-                            machine.text.split("<h1>")[1]?.split("</h1>")[0] ||
-                            machine.text.split("<h3>")[1]?.split("</h3>")[0] ||
-                            ""
-                          }
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div dangerouslySetInnerHTML={{ __html: machine.text }} />
-                    </div>
-                  ))
-              ) : (
-                <div className="col-span-3 text-center text-gray-500">
-                  No products found
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* KDS Series */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center">KDS Series</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              {machines && machines.length > 0 ? (
-                machines
-                  .find((series) => series.slug === "kds-series")
-                  ?.metadata.machines.map((machine: Machine, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                      <div className="h-48 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
-                        <img
-                          src={machine.img.url}
-                          alt={
-                            machine.text.split("<h3>")[1]?.split("</h3>")[0] ||
-                            ""
-                          }
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div dangerouslySetInnerHTML={{ __html: machine.text }} />
-                    </div>
-                  ))
-              ) : (
-                <div className="col-span-3 text-center text-gray-500">
-                  No products found
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Self Kiosk Series */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center">
-              Self Kiosk Series
-            </h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              {machines && machines.length > 0 ? (
-                machines
-                  .find((series) => series.slug === "self-kiosk-series")
-                  ?.metadata.machines.map((machine: Machine, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                      <div className="h-48 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
-                        <img
-                          src={machine.img.url}
-                          alt={
-                            machine.text.split("<h3>")[1]?.split("</h3>")[0] ||
-                            ""
-                          }
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div dangerouslySetInnerHTML={{ __html: machine.text }} />
-                    </div>
-                  ))
-              ) : (
-                <div className="col-span-3 text-center text-gray-500">
-                  No products found
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Printer and Cash Drawer Series */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center">
-              Printer and Cash Drawer Series
-            </h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              {machines && machines.length > 0 ? (
-                machines
-                  .find(
-                    (series) => series.slug === "printer-and-cash-drawer-series"
-                  )
-                  ?.metadata.machines.map((machine: Machine, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                      <div className="h-48 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
-                        <img
-                          src={machine.img.url}
-                          alt={
-                            machine.text.split("<h3>")[1]?.split("</h3>")[0] ||
-                            ""
-                          }
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div dangerouslySetInnerHTML={{ __html: machine.text }} />
-                    </div>
-                  ))
-              ) : (
-                <div className="col-span-3 text-center text-gray-500">
-                  No products found
-                </div>
-              )}
-            </div>
-          </div>
+          {renderSeries("pos-series", "POS Series")}
+          {renderSeries("kds-series", "KDS Series")}
+          {renderSeries("self-kiosk-series", "Self Kiosk Series")}
+          {renderSeries(
+            "printer-and-cash-drawer-series",
+            "Printer and Cash Drawer Series"
+          )}
         </div>
       </div>
 
@@ -259,7 +177,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
               <p className="text-4xl font-bold mb-6">
                 ${isYearly ? prices.basic.yearly : prices.basic.monthly}
                 <span className="text-lg text-gray-600">
-                  /{isYearly ? "year" : "week"}
+                  /{isYearly ? "year(ex. GST)" : "week(ex. GST)"}
                 </span>
               </p>
               <ul className="space-y-4 mb-8">
@@ -312,10 +230,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   Basic Reporting
                 </li>
               </ul>
-              <button
-                onClick={handleOpenForm}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors active:scale-95 transform"
-              >
+              <button onClick={handleOpenForm} className={BUTTON_STYLES.basic}>
                 Get Started
               </button>
             </div>
@@ -329,7 +244,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
               <p className="text-4xl font-bold mb-6">
                 ${isYearly ? prices.pro.yearly : prices.pro.monthly}
                 <span className="text-lg text-gray-600">
-                  /{isYearly ? "year" : "week"}
+                  /{isYearly ? "year(ex. GST)" : "week(ex. GST)"}
                 </span>
               </p>
               <ul className="space-y-4 mb-8">
@@ -382,10 +297,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   Multi-store Management
                 </li>
               </ul>
-              <button
-                onClick={handleOpenForm}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors active:scale-95 transform"
-              >
+              <button onClick={handleOpenForm} className={BUTTON_STYLES.pro}>
                 Get Started
               </button>
             </div>
@@ -399,7 +311,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   ? prices.enterprise.yearly
                   : prices.enterprise.monthly}
                 <span className="text-lg text-gray-600">
-                  /{isYearly ? "year" : "week"}
+                  /{isYearly ? "year(ex. GST)" : "week(ex. GST)"}
                 </span>
               </p>
               <ul className="space-y-4 mb-8">
@@ -454,7 +366,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
               </ul>
               <button
                 onClick={handleOpenForm}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors active:scale-95 transform"
+                className={BUTTON_STYLES.enterprise}
               >
                 Contact Us
               </button>
@@ -488,19 +400,19 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-4">Quick Checkout</td>
+                  <td className="py-2 px-4">Checkout</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                 </tr>
                 <tr className="bg-gray-50 dark:bg-gray-800">
-                  <td className="py-2 px-4">Takeout</td>
+                  <td className="py-2 px-4">Menu Management</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-4">Delivery</td>
+                  <td className="py-2 px-4">Staff Management</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
@@ -512,7 +424,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   <td className="text-center">✔</td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-4">Dine-in</td>
+                  <td className="py-2 px-4">Floor map</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
@@ -526,11 +438,11 @@ export default function PricingClient({ machines }: PricingClientProps) {
                 {/* Features */}
                 <tr>
                   <td className="py-2 px-4 font-semibold" colSpan={4}>
-                    Features
+                    Backend Features
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-4">Reports</td>
+                  <td className="py-2 px-4">Reports&Analytics</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
@@ -548,15 +460,15 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   <td className="text-center">✔</td>
                 </tr>
                 <tr className="bg-gray-50 dark:bg-gray-800">
-                  <td className="py-2 px-4">Kitchen Display</td>
-                  <td className="text-center">✔</td>
+                  <td className="py-2 px-4">Loyalty Program</td>
+                  <td className="text-center">—</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                 </tr>
                 <tr>
                   <td className="py-2 px-4">Marketing</td>
                   <td className="text-center">—</td>
-                  <td className="text-center">—</td>
+                  <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                 </tr>
                 <tr className="bg-gray-50 dark:bg-gray-800">
@@ -572,7 +484,7 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-4">Takeout/Delivery</td>
+                  <td className="py-2 px-4">Third Party Integration</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
                   <td className="text-center">✔</td>
@@ -588,6 +500,18 @@ export default function PricingClient({ machines }: PricingClientProps) {
                   <td className="py-2 px-4 font-semibold" colSpan={4}>
                     Optional Extensions
                   </td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4">Smart paperless kitchen</td>
+                  <td className="text-center">—</td>
+                  <td className="text-center">✔</td>
+                  <td className="text-center">✔</td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4">Kiosk</td>
+                  <td className="text-center">—</td>
+                  <td className="text-center">—</td>
+                  <td className="text-center">✔</td>
                 </tr>
                 <tr>
                   <td className="py-2 px-4">Hardware</td>
@@ -609,6 +533,36 @@ export default function PricingClient({ machines }: PricingClientProps) {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Customization Section */}
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-12">
+            <motion.h2 {...MOTION_CONFIG} className="text-2xl font-bold mb-4">
+              Need a Custom Solution?
+            </motion.h2>
+            <motion.p
+              {...MOTION_CONFIG}
+              transition={{ ...MOTION_CONFIG.transition, delay: 0.2 }}
+              className="text-lg text-gray-600 dark:text-gray-400 mb-6"
+            >
+              We offer flexible customization services tailored to your specific
+              needs. Whether you need special features or integration with
+              existing systems, we provide professional solutions to help your
+              business grow.
+            </motion.p>
+            <motion.button
+              {...MOTION_CONFIG}
+              transition={{ ...MOTION_CONFIG.transition, delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={handleOpenForm}
+              className={BUTTON_STYLES.custom}
+            >
+              Contact Us for Custom Solutions
+            </motion.button>
           </div>
         </div>
       </div>

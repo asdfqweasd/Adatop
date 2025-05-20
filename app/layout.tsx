@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { CartProvider } from "@/cosmic/blocks/ecommerce/CartProvider";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Suspense } from "react";
+import TawkMessenger from "@/components/TawkMessenger";
 export const revalidate = 0;
 
 const sans = Libre_Franklin({ subsets: ["latin"], variable: "--font-sans" });
@@ -52,6 +53,7 @@ export default function RootLayout({
                 {children}
               </div>
               <Footer />
+              <TawkMessenger />
             </CartProvider>
             <TailwindIndicator />
           </ThemeProvider>
